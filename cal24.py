@@ -3,23 +3,44 @@ from PIL import Image,ImageTk
 
 
 def getDigits(digit):
-    # print(type(digit))
-    print(digit)
-    current = result_label['text']
-    new_value = current + str(digit)
-    # print(new_value)
-    result_label.config(text=new_value)
+    # # print(type(digit))
+    # print(digit)
+    # current = result_label['text']
+    # new_value = current + str(digit)
+    # # print(new_value)
+    # result_label.config(text=new_value)
+    # if digit=='C':
+    #     result_label.config(text='')
+        current = result_label['text']
+    
+        if digit == 'C':
+            result_label.config(text='')
+            return
+    
+        if digit == '=':
+            try:
+                expression = current
+                result = eval(expression)  # Use eval to calculate the result
+                result_label.config(text=str(result))
+            except ZeroDivisionError:
+                result_label.config(text='Error')
+            except Exception as e:
+                result_label.config(text='Error')
+            return
+    
+        new_value = current + str(digit)
+        result_label.config(text=new_value)
 
 root = Tk()
 root.title('Calculator')
 root.geometry('280x380')
 root.resizable(0,0)
-# root.config(background='black')
+root.config(background='black')
 
 # display section
-result_label = Label(root,text='',bg='gray',fg='white')
-result_label.grid(row=0,column=0,columnspan=10,pady=(50,25))
-result_label.config(font=('verdana',30,'bold'))
+result_label = Label(root,text='',bg='black',fg='white')
+result_label.grid(row=0,column=0,columnspan=10,pady=(50,25),sticky='w')
+result_label.config(font=('verdana',12,'bold'))
 
 
 # button section
