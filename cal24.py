@@ -20,7 +20,7 @@ def getDigits(digit):
         if digit == '=':
             try:
                 expression = current
-                result = eval(expression)  # Use eval to calculate the result
+                result = eval(expression)  
                 result_label.config(text=str(result))
             except ZeroDivisionError:
                 result_label.config(text='Error')
@@ -69,7 +69,11 @@ buttons = [
 ]
 
 for (text,row,col) in buttons:
-    Button(root,text=text,bg='gray',fg='black',width=5,height=2,font=('verdana',14),command=lambda text=text:getDigits(text)).grid(row=row,column=col)
+    Button(root,text=text,bg='gray',fg='black',width=5,height=2,font=('verdana',14),command=lambda text=text:getDigits(text)).grid(row=row,column=col, sticky='nsew')
     
+for i in range(5):
+    root.grid_rowconfigure(i, weight=1)
+for i in range(4):
+    root.grid_columnconfigure(i, weight=1)
     
 root.mainloop()
