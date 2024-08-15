@@ -1,6 +1,15 @@
 from tkinter import * 
 from PIL import Image,ImageTk 
 
+
+def getDigits(digit):
+    # print(type(digit))
+    print(digit)
+    current = result_label['text']
+    new_value = current + str(digit)
+    # print(new_value)
+    result_label.config(text=new_value)
+
 root = Tk()
 root.title('Calculator')
 root.geometry('280x380')
@@ -8,9 +17,9 @@ root.resizable(0,0)
 # root.config(background='black')
 
 # display section
-display = Label(root,text=0,bg='gray',fg='white')
-display.grid(row=0,column=0,pady=(50,25))
-display.config(font=('verdana',30,'bold'))
+result_label = Label(root,text='',bg='gray',fg='white')
+result_label.grid(row=0,column=0,columnspan=10,pady=(50,25))
+result_label.config(font=('verdana',30,'bold'))
 
 
 # button section
@@ -39,7 +48,7 @@ buttons = [
 ]
 
 for (text,row,col) in buttons:
-    Button(root,text=text,bg='gray',fg='black',width=3,height=1,font=('verdana',12)).grid(row=row,column=col)
+    Button(root,text=text,bg='gray',fg='black',width=5,height=2,font=('verdana',14),command=lambda text=text:getDigits(text)).grid(row=row,column=col)
     
     
 root.mainloop()
